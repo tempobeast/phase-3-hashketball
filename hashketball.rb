@@ -126,4 +126,77 @@ def game_hash
   }
 end
 
-# Write code here
+
+def num_points_scored (selected_player)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players + away_players
+  player_hash = all_players.find { |player_hash| player_hash[:player_name] == selected_player}
+   player_hash[:points]
+end
+
+def shoe_size (selected_player)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players + away_players
+  player_hash = all_players.find { |player_hash| player_hash[:player_name] == selected_player }
+  player_hash[:shoe]
+end
+
+def team_colors (selected_team)
+  home_team = game_hash[:home]
+  away_team = game_hash[:away]
+  both_teams = []
+  both_teams.push(home_team, away_team)
+  colors_of_team = both_teams.find { |team_hash| team_hash[:team_name] == selected_team}
+  colors_of_team[:colors]
+end
+
+def team_names 
+  home_team = game_hash[:home][:team_name]
+  away_team = game_hash[:away][:team_name]
+  both_teams = []
+  both_teams.push(home_team, away_team)
+end
+
+def player_numbers (selected_team)
+  home_team = game_hash[:home][:team_name]
+  away_team = game_hash[:away][:team_name]
+  home_numbers = []
+  game_hash[:home][:players].map { |player_hash| home_numbers.push(player_hash[:number])}
+  away_numbers = []
+  game_hash[:away][:players].map { |player_hash| away_numbers.push(player_hash[:number])}
+  if selected_team == home_team
+    home_numbers
+  else 
+    away_numbers
+  end
+end
+
+def player_stats (selected_player)
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players + away_players
+  player_hash = all_players.find { |player_hash| player_hash[:player_name] == selected_player}
+   player_hash
+end
+
+def big_shoe_rebounds 
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players + away_players
+  all_shoes = []
+  all_players.map { |athlete| all_shoes.push(athlete[:shoe])}
+  biggest_shoe = all_shoes.max
+  shoe_rebounder = all_players.find { |athlete| athlete[:shoe] == biggest_shoe}
+  shoe_rebounder[:rebounds]
+end
+
+def most_points_scored
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  all_players = home_players + away_players
+  all_points = []
+  all_players.map { |athlete| all_points.push(athlete[:points])}
+  puts all_points
+end
